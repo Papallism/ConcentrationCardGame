@@ -69,13 +69,13 @@ namespace ConcentrationCardGame
             // newGameToolStripMenuItem
             // 
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
-            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.newGameToolStripMenuItem.Text = "New Game";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -93,22 +93,25 @@ namespace ConcentrationCardGame
             // 
             this.smallToolStripMenuItem.CheckOnClick = true;
             this.smallToolStripMenuItem.Name = "smallToolStripMenuItem";
-            this.smallToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.smallToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.smallToolStripMenuItem.Text = "Small";
+            this.smallToolStripMenuItem.Click += new System.EventHandler(this.SizeMenuItem_Click);
             // 
             // mediumToolStripMenuItem
             // 
             this.mediumToolStripMenuItem.CheckOnClick = true;
             this.mediumToolStripMenuItem.Name = "mediumToolStripMenuItem";
-            this.mediumToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mediumToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.mediumToolStripMenuItem.Text = "Medium";
+            this.mediumToolStripMenuItem.Click += new System.EventHandler(this.SizeMenuItem_Click);
             // 
             // largeToolStripMenuItem
             // 
             this.largeToolStripMenuItem.CheckOnClick = true;
             this.largeToolStripMenuItem.Name = "largeToolStripMenuItem";
-            this.largeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.largeToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.largeToolStripMenuItem.Text = "Large";
+            this.largeToolStripMenuItem.Click += new System.EventHandler(this.SizeMenuItem_Click);
             // 
             // ruleToolStripMenuItem
             // 
@@ -125,6 +128,7 @@ namespace ConcentrationCardGame
             this.match2ToolStripMenuItem.Name = "match2ToolStripMenuItem";
             this.match2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.match2ToolStripMenuItem.Text = "Match 2";
+            this.match2ToolStripMenuItem.Click += new System.EventHandler(this.RuleMenuItem_Click);
             // 
             // match3ToolStripMenuItem
             // 
@@ -132,6 +136,7 @@ namespace ConcentrationCardGame
             this.match3ToolStripMenuItem.Name = "match3ToolStripMenuItem";
             this.match3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.match3ToolStripMenuItem.Text = "Match 3";
+            this.match3ToolStripMenuItem.Click += new System.EventHandler(this.RuleMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
