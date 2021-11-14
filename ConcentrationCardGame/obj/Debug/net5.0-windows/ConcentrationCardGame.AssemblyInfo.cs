@@ -11,11 +11,13 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("ConcentrationCardGame")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("University of Nicosia")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyCopyrightAttribute("Michalis Papallis")]
+[assembly: System.Reflection.AssemblyDescriptionAttribute("Welcome to the Concentration Card Game!\r\nI hope you enjoy playing it!")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("ConcentrationCardGame")]
+[assembly: System.Reflection.AssemblyProductAttribute("The Concentration Card Game")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ConcentrationCardGame")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows7.0")]
