@@ -5,11 +5,44 @@ namespace ConcentrationCardGame
 {
     public partial class MainForm : Form
     {
+        private const int SMALL = 5;
+        private const int MEDIUM = 11;
+        private const int LARGE = 17;
+
+        private int numberOfMoves = 0;
+
         private AboutBoxForm aboutBox = new AboutBoxForm();
 
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            LoadCards();
+        }
+
+        // Function for loading cards
+        private void LoadCards()
+        {
+            for (int i = 0; i < SMALL * 2; i++)
+            {
+                Button button = new Button();
+                button.Width = 100;
+                button.Height = 100;
+                // Switch case for 3 different sizes?
+                button.Image = Properties.Resources.QuestionMark100;
+                button.BackgroundImageLayout = ImageLayout.Zoom;
+
+                flowLayoutPanelCards.Controls.Add(button);
+            }
+        }
+
+        // Function for New Game menu item
+        private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // TODO: Restart (Load cards again?)
         }
 
         // Function for Exit menu item

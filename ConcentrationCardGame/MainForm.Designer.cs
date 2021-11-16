@@ -29,7 +29,8 @@ namespace ConcentrationCardGame
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,21 +42,22 @@ namespace ConcentrationCardGame
             this.match2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.match3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
+            this.flowLayoutPanelCards = new System.Windows.Forms.FlowLayoutPanel();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // menuStrip
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.gameToolStripMenuItem,
             this.sizeToolStripMenuItem,
             this.ruleToolStripMenuItem,
             this.aboutToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(560, 24);
+            this.menuStrip.TabIndex = 0;
+            this.menuStrip.Text = "menuStrip";
             // 
             // gameToolStripMenuItem
             // 
@@ -71,6 +73,7 @@ namespace ConcentrationCardGame
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
             this.newGameToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.newGameToolStripMenuItem.Text = "New Game";
+            this.newGameToolStripMenuItem.Click += new System.EventHandler(this.newGameToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -91,7 +94,9 @@ namespace ConcentrationCardGame
             // 
             // smallToolStripMenuItem
             // 
+            this.smallToolStripMenuItem.Checked = true;
             this.smallToolStripMenuItem.CheckOnClick = true;
+            this.smallToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.smallToolStripMenuItem.Name = "smallToolStripMenuItem";
             this.smallToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.smallToolStripMenuItem.Text = "Small";
@@ -124,9 +129,11 @@ namespace ConcentrationCardGame
             // 
             // match2ToolStripMenuItem
             // 
+            this.match2ToolStripMenuItem.Checked = true;
             this.match2ToolStripMenuItem.CheckOnClick = true;
+            this.match2ToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.match2ToolStripMenuItem.Name = "match2ToolStripMenuItem";
-            this.match2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.match2ToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.match2ToolStripMenuItem.Text = "Match 2";
             this.match2ToolStripMenuItem.Click += new System.EventHandler(this.RuleMenuItem_Click);
             // 
@@ -134,7 +141,7 @@ namespace ConcentrationCardGame
             // 
             this.match3ToolStripMenuItem.CheckOnClick = true;
             this.match3ToolStripMenuItem.Name = "match3ToolStripMenuItem";
-            this.match3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.match3ToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.match3ToolStripMenuItem.Text = "Match 3";
             this.match3ToolStripMenuItem.Click += new System.EventHandler(this.RuleMenuItem_Click);
             // 
@@ -145,18 +152,29 @@ namespace ConcentrationCardGame
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // flowLayoutPanelCards
+            // 
+            this.flowLayoutPanelCards.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelCards.Location = new System.Drawing.Point(0, 24);
+            this.flowLayoutPanelCards.Name = "flowLayoutPanelCards";
+            this.flowLayoutPanelCards.Size = new System.Drawing.Size(560, 426);
+            this.flowLayoutPanelCards.TabIndex = 1;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.ClientSize = new System.Drawing.Size(560, 450);
+            this.Controls.Add(this.flowLayoutPanelCards);
+            this.Controls.Add(this.menuStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "The Concentration Game";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -164,7 +182,7 @@ namespace ConcentrationCardGame
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem gameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newGameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
@@ -176,6 +194,7 @@ namespace ConcentrationCardGame
         private System.Windows.Forms.ToolStripMenuItem match2ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem match3ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelCards;
     }
 }
 
