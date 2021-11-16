@@ -9,6 +9,9 @@ namespace ConcentrationCardGame
         private const int MEDIUM = 11;
         private const int LARGE = 17;
 
+        private string selectedSizeName = "Small";
+        private string selectedRuleName = "Match 2";
+
         private int numberOfMoves = 0;
 
         private AboutBoxForm aboutBox = new AboutBoxForm();
@@ -26,16 +29,83 @@ namespace ConcentrationCardGame
         // Function for loading cards
         private void LoadCards()
         {
-            for (int i = 0; i < SMALL * 2; i++)
+            // Clear all controls from the flow panel
+            flowLayoutPanelCards.Controls.Clear();
+
+            for (int i = 0; i < GetSelectedSizeInt(selectedSizeName) * 2; i++)
             {
                 Button button = new Button();
-                button.Width = 100;
-                button.Height = 100;
-                // Switch case for 3 different sizes?
-                button.Image = Properties.Resources.QuestionMark100;
+                button.Width = GetImageDimensions(selectedSizeName);
+                button.Height = GetImageDimensions(selectedSizeName);
+                button.Image = GetImage(selectedSizeName);
                 button.BackgroundImageLayout = ImageLayout.Zoom;
+                button.Click += Button_Click;
 
                 flowLayoutPanelCards.Controls.Add(button);
+            }
+        }
+
+        // Function for clicking on a card
+        private void Button_Click(object sender, EventArgs e)
+        {
+            // Increase move counter
+            numberOfMoves++;
+        }
+
+        // Function to get the number of pairs according to the selected size item
+        private int GetSelectedSizeInt(string sizeName)
+        {
+            switch (sizeName)
+            {
+                case "Small":
+                    return SMALL;
+
+                case "Medium":
+                    return MEDIUM;
+
+                case "Large":
+                    return LARGE;
+
+                default:
+                    return 0;
+            }
+        }
+
+        // Function to get the button image according to the selected size item
+        private System.Drawing.Bitmap GetImage(string sizeName)
+        {
+            switch (sizeName)
+            {
+                case "Small":
+                    return Properties.Resources.QuestionMark100;
+
+                case "Medium":
+                    return Properties.Resources.QuestionMark80;
+
+                case "Large":
+                    return Properties.Resources.QuestionMark60;
+
+                default:
+                    return null;
+            }
+        }
+
+        // Function to get the image dimensions according to the selected size item
+        private int GetImageDimensions(string sizeName)
+        {
+            switch (sizeName)
+            {
+                case "Small":
+                    return 100;
+
+                case "Medium":
+                    return 80;
+
+                case "Large":
+                    return 60;
+
+                default:
+                    return 0;
             }
         }
 
@@ -65,7 +135,8 @@ namespace ConcentrationCardGame
         private void SizeMenuItem_Click(object sender, EventArgs e)
         {
             // Get the size item that was clicked
-            var selectedSize = sender as ToolStripMenuItem;
+            var selectedSizeItem = sender as ToolStripMenuItem;
+            selectedSizeName = selectedSizeItem.Text;
 
             // Uncheck all size items
             foreach (ToolStripMenuItem sizeItem in sizeToolStripMenuItem.DropDownItems)
@@ -74,14 +145,17 @@ namespace ConcentrationCardGame
             }
 
             // Recheck the size item that was clicked
-            selectedSize.Checked = true;
+            selectedSizeItem.Checked = true;
+
+            LoadCards();
         }
 
         // Function for selecting a rule from the menu
         private void RuleMenuItem_Click(object sender, EventArgs e)
         {
             // Get the rule item that was clicked
-            var selectedRule = sender as ToolStripMenuItem;
+            var selectedRuleItem = sender as ToolStripMenuItem;
+            selectedRuleName = selectedRuleItem.Text;
 
             // Uncheck all rule items
             foreach (ToolStripMenuItem ruleItem in ruleToolStripMenuItem.DropDownItems)
@@ -90,7 +164,9 @@ namespace ConcentrationCardGame
             }
 
             // Recheck the rule item that was clicked
-            selectedRule.Checked = true;
+            selectedRuleItem.Checked = true;
+
+            LoadCards();
         }
 
         // Function for showing AboutBoxForm if user clicks on About menu item
