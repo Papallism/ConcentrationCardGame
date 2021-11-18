@@ -14,6 +14,8 @@ namespace ConcentrationCardGame
 
         private int numberOfMoves = 0;
 
+        private Random rand = new Random();
+
         private AboutBoxForm aboutBox = new AboutBoxForm();
 
         public MainForm()
@@ -31,25 +33,60 @@ namespace ConcentrationCardGame
         {
             // Clear all controls from the flow panel
             flowLayoutPanelCards.Controls.Clear();
+            numberOfMoves = 0;
 
-            for (int i = 0; i < GetSelectedSizeInt(selectedSizeName) * 2; i++)
+            for (int i = 0; i < GetSelectedSizeInt(selectedSizeName) * GetSelectedRuleInt(selectedRuleName); i++)
             {
                 Button button = new Button();
-                button.Width = GetImageDimensions(selectedSizeName);
-                button.Height = GetImageDimensions(selectedSizeName);
-                button.Image = GetImage(selectedSizeName);
+                button.Width = GetButtonDimensions(selectedSizeName);
+                button.Height = GetButtonDimensions(selectedSizeName);
                 button.BackgroundImageLayout = ImageLayout.Zoom;
+                //button.BackgroundImage = Properties.Resources.QuestionMark1024;
                 button.Click += Button_Click;
 
                 flowLayoutPanelCards.Controls.Add(button);
             }
+
+            SetImagesToAllButtons();
         }
 
         // Function for clicking on a card
         private void Button_Click(object sender, EventArgs e)
         {
+            var clickedCard = sender as Button;
+            clickedCard.BackgroundImage = Properties.Resources.image13;
+
+            SetImagesToAllButtons();
+
             // Increase move counter
             numberOfMoves++;
+        }
+
+        // Function to set button background image
+        private void SetImagesToAllButtons()
+        {
+            var randomPosition = rand.Next(0, GetSelectedSizeInt(selectedSizeName) * GetSelectedRuleInt(selectedRuleName));
+
+            // TODO: background image randomization
+        }
+
+        // Function to get the image dimensions according to the selected size item
+        private int GetButtonDimensions(string sizeName)
+        {
+            switch (sizeName)
+            {
+                case "Small":
+                    return 100;
+
+                case "Medium":
+                    return 80;
+
+                case "Large":
+                    return 60;
+
+                default:
+                    return 0;
+            }
         }
 
         // Function to get the number of pairs according to the selected size item
@@ -71,38 +108,16 @@ namespace ConcentrationCardGame
             }
         }
 
-        // Function to get the button image according to the selected size item
-        private System.Drawing.Bitmap GetImage(string sizeName)
+        // Function to get the number of card copies according tot the selected rule item
+        private int GetSelectedRuleInt(string ruleName)
         {
-            switch (sizeName)
+            switch (ruleName)
             {
-                case "Small":
-                    return Properties.Resources.QuestionMark100;
+                case "Match 2":
+                    return 2;
 
-                case "Medium":
-                    return Properties.Resources.QuestionMark80;
-
-                case "Large":
-                    return Properties.Resources.QuestionMark60;
-
-                default:
-                    return null;
-            }
-        }
-
-        // Function to get the image dimensions according to the selected size item
-        private int GetImageDimensions(string sizeName)
-        {
-            switch (sizeName)
-            {
-                case "Small":
-                    return 100;
-
-                case "Medium":
-                    return 80;
-
-                case "Large":
-                    return 60;
+                case "Match 3":
+                    return 3;
 
                 default:
                     return 0;

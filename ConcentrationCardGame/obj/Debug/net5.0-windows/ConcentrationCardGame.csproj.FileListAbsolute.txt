@@ -18,3 +18,4 @@ C:\Users\mihal\source\repos\ConcentrationCardGame\ConcentrationCardGame\obj\Debu
 C:\Users\mihal\source\repos\ConcentrationCardGame\ConcentrationCardGame\obj\Debug\net5.0-windows\ConcentrationCardGame.AboutBoxForm.resources
 C:\Users\mihal\source\repos\ConcentrationCardGame\ConcentrationCardGame\obj\Debug\net5.0-windows\ConcentrationCardGame.MainForm.resources
 C:\Users\mihal\source\repos\ConcentrationCardGame\ConcentrationCardGame\obj\Debug\net5.0-windows\ConcentrationCardGame.Properties.Resources.resources
+C:\Users\mihal\source\repos\ConcentrationCardGame\ConcentrationCardGame\obj\Debug\net5.0-windows\ConcentrationCardGame.SplashScreenForm.resources
