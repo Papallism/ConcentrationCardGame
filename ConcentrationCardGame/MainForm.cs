@@ -56,7 +56,7 @@ namespace ConcentrationCardGame
             var clickedCard = sender as Button;
             clickedCard.BackgroundImage = Properties.Resources.image13;
 
-            SetImagesToAllButtons();
+            // TODO: timer for showing image
 
             // Increase move counter
             numberOfMoves++;
@@ -127,7 +127,7 @@ namespace ConcentrationCardGame
         // Function for New Game menu item
         private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO: Restart (Load cards again?)
+            LoadCards();
         }
 
         // Function for Exit menu item
