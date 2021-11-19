@@ -55,7 +55,7 @@ namespace ConcentrationCardGame
             this.aboutToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(788, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1003, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip";
             // 
@@ -157,14 +157,14 @@ namespace ConcentrationCardGame
             this.flowLayoutPanelCards.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelCards.Location = new System.Drawing.Point(0, 24);
             this.flowLayoutPanelCards.Name = "flowLayoutPanelCards";
-            this.flowLayoutPanelCards.Size = new System.Drawing.Size(788, 480);
+            this.flowLayoutPanelCards.Size = new System.Drawing.Size(1003, 670);
             this.flowLayoutPanelCards.TabIndex = 1;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(788, 504);
+            this.ClientSize = new System.Drawing.Size(1003, 694);
             this.Controls.Add(this.flowLayoutPanelCards);
             this.Controls.Add(this.menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
+using System.Drawing;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace ConcentrationCardGame
 {
@@ -17,6 +20,15 @@ namespace ConcentrationCardGame
         private Random rand = new Random();
 
         private AboutBoxForm aboutBox = new AboutBoxForm();
+        
+        private List<Image> images = new List<Image>()
+        {
+            Properties.Resources.image0, Properties.Resources.image1, Properties.Resources.image2, Properties.Resources.image3,
+            Properties.Resources.image4, Properties.Resources.image5, Properties.Resources.image6, Properties.Resources.image7,
+            Properties.Resources.image8, Properties.Resources.image9, Properties.Resources.image10, Properties.Resources.image11,
+            Properties.Resources.image12, Properties.Resources.image13, Properties.Resources.image14, Properties.Resources.image15,
+            Properties.Resources.image16,
+        };
 
         public MainForm()
         {
@@ -35,13 +47,14 @@ namespace ConcentrationCardGame
             flowLayoutPanelCards.Controls.Clear();
             numberOfMoves = 0;
 
+            // Create buttons and add them to flow panel
             for (int i = 0; i < GetSelectedSizeInt(selectedSizeName) * GetSelectedRuleInt(selectedRuleName); i++)
             {
                 Button button = new Button();
-                button.Width = GetButtonDimensions(selectedSizeName);
-                button.Height = GetButtonDimensions(selectedSizeName);
+                button.Width = 100; //GetButtonDimensions(selectedSizeName);
+                button.Height = 100; //GetButtonDimensions(selectedSizeName);
                 button.BackgroundImageLayout = ImageLayout.Zoom;
-                //button.BackgroundImage = Properties.Resources.QuestionMark1024;
+                button.BackgroundImage = Properties.Resources.QuestionMark1024;
                 button.Click += Button_Click;
 
                 flowLayoutPanelCards.Controls.Add(button);
@@ -53,21 +66,36 @@ namespace ConcentrationCardGame
         // Function for clicking on a card
         private void Button_Click(object sender, EventArgs e)
         {
-            var clickedCard = sender as Button;
-            clickedCard.BackgroundImage = Properties.Resources.image13;
+            Button button = sender as Button;
+            // TODO: reveal image
 
-            // TODO: timer for showing image
-
-            // Increase move counter
+            // Increment the number of total moves
             numberOfMoves++;
         }
 
         // Function to set button background image
         private void SetImagesToAllButtons()
         {
-            var randomPosition = rand.Next(0, GetSelectedSizeInt(selectedSizeName) * GetSelectedRuleInt(selectedRuleName));
+            List<Image> updatedImages = new List<Image>();
+            // Add as many images as the size selected to the list
+            updatedImages = images.GetRange(0, GetSelectedSizeInt(selectedSizeName));
+            // Duplicate the list as many times as the rule selected
+            for (int i = 1; i < GetSelectedRuleInt(selectedRuleName); i++)
+            {
+                updatedImages.AddRange(updatedImages);
+            }
 
             // TODO: background image randomization
+            foreach (Button button in flowLayoutPanelCards.Controls)
+            {
+                int randomPosition = 0;
+                do
+                {
+                    randomPosition = rand.Next(0, GetSelectedSizeInt(selectedSizeName) * GetSelectedRuleInt(selectedRuleName));
+                    button.BackgroundImage = updatedImages[randomPosition];
+                } while (updatedImages[randomPosition] == null);
+                updatedImages[randomPosition] = null;
+            }
         }
 
         // Function to get the image dimensions according to the selected size item

@@ -39,7 +39,7 @@ namespace ConcentrationCardGame
             // timerSplashScreen
             // 
             this.timerSplashScreen.Enabled = true;
-            this.timerSplashScreen.Interval = 3000;
+            this.timerSplashScreen.Interval = 2000;
             this.timerSplashScreen.Tick += new System.EventHandler(this.timerSplashScreen_Tick);
             // 
             // pictureBox1
