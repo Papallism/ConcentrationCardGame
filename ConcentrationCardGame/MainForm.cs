@@ -62,6 +62,7 @@ namespace ConcentrationCardGame
                 flowLayoutPanelCards.Controls.Add(card);
             }
 
+            // Randomly set an image to every card
             SetImagesToAllButtons();
         }
 
@@ -91,25 +92,35 @@ namespace ConcentrationCardGame
                 // If turned cards do not match, hide them
                 if (!cardsMatch)
                 {
-                    foreach (Card turnedCard in clickedCards)
-                    {
-                        turnedCard.BackgroundImage = Properties.Resources.QuestionMark1024;
-                    }
+                    // Start the timer to hide revealed unmatched cards
+                    timerHideCards.Enabled = true;
                 }
-                // Else if turned cards match, set their IsMatched property to true
+                // Else if turned cards match, leave them revealed and set their IsMatched property to true
                 else
                 {
                     foreach (Card turnedCard in clickedCards)
                     {
                         turnedCard.IsMatched = true;
                     }
-                }
 
-                // Clear the list of currently revealed cards
-                clickedCards.Clear();
+                    clickedCards.Clear();
+                }
             }
 
             CheckIfGameFinished();
+        }
+
+        // Timer function for hiding unmatched revealed cards
+        private void timerHideCards_Tick(object sender, EventArgs e)
+        {
+            foreach (Card turnedCard in clickedCards)
+            {
+                turnedCard.BackgroundImage = Properties.Resources.QuestionMark1024;
+            }
+
+            clickedCards.Clear();
+
+            timerHideCards.Enabled = false;
         }
 
         // Function to check if the game is over
