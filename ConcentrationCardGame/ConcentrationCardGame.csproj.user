@@ -4,6 +4,9 @@
     <Compile Update="AboutBoxForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Card.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

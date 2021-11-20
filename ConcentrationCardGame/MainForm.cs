@@ -3,6 +3,7 @@ using System.Linq;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace ConcentrationCardGame
 {
@@ -21,6 +22,8 @@ namespace ConcentrationCardGame
 
         private AboutBoxForm aboutBox = new AboutBoxForm();
         
+        private List<Card> clickedCards = new List<Card>();
+
         private List<Image> images = new List<Image>()
         {
             Properties.Resources.image0, Properties.Resources.image1, Properties.Resources.image2, Properties.Resources.image3,
@@ -43,58 +46,118 @@ namespace ConcentrationCardGame
         // Function for loading cards
         private void LoadCards()
         {
-            // Clear all controls from the flow panel
-            flowLayoutPanelCards.Controls.Clear();
+            // Clear list, counters and all controls from the flow panel
             numberOfMoves = 0;
+            clickedCards.Clear();
+            flowLayoutPanelCards.Controls.Clear();
 
             // Create buttons and add them to flow panel
             for (int i = 0; i < GetSelectedSizeInt(selectedSizeName) * GetSelectedRuleInt(selectedRuleName); i++)
             {
-                Button button = new Button();
-                button.Width = 100; //GetButtonDimensions(selectedSizeName);
-                button.Height = 100; //GetButtonDimensions(selectedSizeName);
-                button.BackgroundImageLayout = ImageLayout.Zoom;
-                button.BackgroundImage = Properties.Resources.QuestionMark1024;
-                button.Click += Button_Click;
+                Card card = new Card();
+                card.Click += Card_Click;
 
-                flowLayoutPanelCards.Controls.Add(button);
+                flowLayoutPanelCards.Controls.Add(card);
             }
 
             SetImagesToAllButtons();
         }
 
-        // Function for clicking on a card
-        private void Button_Click(object sender, EventArgs e)
+        private void Card_Click(object sender, EventArgs e)
         {
-            Button button = sender as Button;
-            // TODO: reveal image
+            var card = sender as Card;
+            var cardsMatch = true;
 
-            // Increment the number of total moves
             numberOfMoves++;
+            clickedCards.Add(card);
+            card.BackgroundImage = card.CardImage;
+
+            // If user turns as many cards as the selected rule, check if the cards match
+            if (clickedCards.Count == GetSelectedRuleInt(selectedRuleName))
+            {
+                // Compare images of turned cards
+                Image firstCardImage = clickedCards.First().CardImage;
+                for (int i = 1; i < GetSelectedRuleInt(selectedRuleName); i++)
+                {
+                    if (!clickedCards[i].CardImage.Equals(firstCardImage))
+                    {
+                        cardsMatch = false;
+                    }
+                }
+
+                // If turned cards do not match, hide them
+                if (!cardsMatch)
+                {
+                    foreach (Card turnedCard in clickedCards)
+                    {
+                        // TODO: Reveal timer
+                        turnedCard.BackgroundImage = Properties.Resources.QuestionMark1024;
+                    }
+                }
+                // If turned cards match, set their IsMatched property to true
+                else
+                {
+                    foreach (Card turnedCard in clickedCards)
+                    {
+                        turnedCard.IsMatched = true;
+                    }
+                }
+
+                clickedCards.Clear();
+            }
+
+            CheckIfGameFinished();
         }
 
-        // Function to set button background image
+        private void CheckIfGameFinished()
+        {
+            var allCardsMatched = true;
+
+            foreach (Card card in flowLayoutPanelCards.Controls)
+            {
+                if (!card.IsMatched)
+                {
+                    allCardsMatched = false;
+                }
+            }
+
+            if (allCardsMatched)
+            {
+                MessageBox.Show("Congratulation, you matched all the cards!",
+                                "You won!",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+            }
+        }
+
+        // Timer function for hiding revealed and unmatched cards
+        private void timerCardReveal_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        // Function to randomly set the background image for all buttons
         private void SetImagesToAllButtons()
         {
-            List<Image> updatedImages = new List<Image>();
-            // Add as many images as the size selected to the list
-            updatedImages = images.GetRange(0, GetSelectedSizeInt(selectedSizeName));
+            var buttonImageList = new List<Image>();
+            // Add as many unique images as the size selected to the list
+            buttonImageList = images.GetRange(0, GetSelectedSizeInt(selectedSizeName));
             // Duplicate the list as many times as the rule selected
             for (int i = 1; i < GetSelectedRuleInt(selectedRuleName); i++)
             {
-                updatedImages.AddRange(updatedImages);
+                buttonImageList.AddRange(buttonImageList);
             }
 
-            // TODO: background image randomization
-            foreach (Button button in flowLayoutPanelCards.Controls)
+            // Card image randomization
+            foreach (Card card in flowLayoutPanelCards.Controls)
             {
                 int randomPosition = 0;
                 do
                 {
                     randomPosition = rand.Next(0, GetSelectedSizeInt(selectedSizeName) * GetSelectedRuleInt(selectedRuleName));
-                    button.BackgroundImage = updatedImages[randomPosition];
-                } while (updatedImages[randomPosition] == null);
-                updatedImages[randomPosition] = null;
+                    card.CardImage = buttonImageList[randomPosition];
+                } while (buttonImageList[randomPosition] == null);
+                buttonImageList[randomPosition] = null;
             }
         }
 
