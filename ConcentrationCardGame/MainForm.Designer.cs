@@ -29,7 +29,6 @@ namespace ConcentrationCardGame
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,7 +43,6 @@ namespace ConcentrationCardGame
             this.match3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanelCards = new System.Windows.Forms.FlowLayoutPanel();
-            this.timerCardReveal = new System.Windows.Forms.Timer(this.components);
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +55,7 @@ namespace ConcentrationCardGame
             this.aboutToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1003, 24);
+            this.menuStrip.Size = new System.Drawing.Size(919, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip";
             // 
@@ -159,19 +157,14 @@ namespace ConcentrationCardGame
             this.flowLayoutPanelCards.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelCards.Location = new System.Drawing.Point(0, 24);
             this.flowLayoutPanelCards.Name = "flowLayoutPanelCards";
-            this.flowLayoutPanelCards.Size = new System.Drawing.Size(1003, 670);
+            this.flowLayoutPanelCards.Size = new System.Drawing.Size(919, 767);
             this.flowLayoutPanelCards.TabIndex = 1;
-            // 
-            // timerCardReveal
-            // 
-            this.timerCardReveal.Interval = 500;
-            this.timerCardReveal.Tick += new System.EventHandler(this.timerCardReveal_Tick);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1003, 694);
+            this.ClientSize = new System.Drawing.Size(919, 791);
             this.Controls.Add(this.flowLayoutPanelCards);
             this.Controls.Add(this.menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -202,7 +195,6 @@ namespace ConcentrationCardGame
         private System.Windows.Forms.ToolStripMenuItem match3ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelCards;
-        private System.Windows.Forms.Timer timerCardReveal;
     }
 }
 

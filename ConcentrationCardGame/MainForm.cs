@@ -43,18 +43,20 @@ namespace ConcentrationCardGame
             LoadCards();
         }
 
-        // Function for loading cards
+        // Function for creating and loading cards
         private void LoadCards()
         {
-            // Clear list, counters and all controls from the flow panel
+            // Clear list, counter and all controls from the flow panel
             numberOfMoves = 0;
             clickedCards.Clear();
             flowLayoutPanelCards.Controls.Clear();
 
-            // Create buttons and add them to flow panel
+            // Create cards and add them to flow panel
             for (int i = 0; i < GetSelectedSizeInt(selectedSizeName) * GetSelectedRuleInt(selectedRuleName); i++)
             {
                 Card card = new Card();
+                card.Width = GetButtonDimensions(selectedSizeName);
+                card.Height = GetButtonDimensions(selectedSizeName);
                 card.Click += Card_Click;
 
                 flowLayoutPanelCards.Controls.Add(card);
@@ -63,6 +65,7 @@ namespace ConcentrationCardGame
             SetImagesToAllButtons();
         }
 
+        // Function for when a card is clicked
         private void Card_Click(object sender, EventArgs e)
         {
             var card = sender as Card;
@@ -90,11 +93,10 @@ namespace ConcentrationCardGame
                 {
                     foreach (Card turnedCard in clickedCards)
                     {
-                        // TODO: Reveal timer
                         turnedCard.BackgroundImage = Properties.Resources.QuestionMark1024;
                     }
                 }
-                // If turned cards match, set their IsMatched property to true
+                // Else if turned cards match, set their IsMatched property to true
                 else
                 {
                     foreach (Card turnedCard in clickedCards)
@@ -103,16 +105,19 @@ namespace ConcentrationCardGame
                     }
                 }
 
+                // Clear the list of currently revealed cards
                 clickedCards.Clear();
             }
 
             CheckIfGameFinished();
         }
 
+        // Function to check if the game is over
         private void CheckIfGameFinished()
         {
             var allCardsMatched = true;
 
+            // Check if all cards have been matched
             foreach (Card card in flowLayoutPanelCards.Controls)
             {
                 if (!card.IsMatched)
@@ -123,20 +128,14 @@ namespace ConcentrationCardGame
 
             if (allCardsMatched)
             {
-                MessageBox.Show("Congratulation, you matched all the cards!",
+                MessageBox.Show($"Congratulation, you matched all the cards in {numberOfMoves} moves!",
                                 "You won!",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
             }
         }
 
-        // Timer function for hiding revealed and unmatched cards
-        private void timerCardReveal_Tick(object sender, EventArgs e)
-        {
-
-        }
-
-        // Function to randomly set the background image for all buttons
+        // Function to randomly set the background image for all cards
         private void SetImagesToAllButtons()
         {
             var buttonImageList = new List<Image>();
@@ -161,26 +160,26 @@ namespace ConcentrationCardGame
             }
         }
 
-        // Function to get the image dimensions according to the selected size item
+        // Function to get the image dimensions as an integer number, according to the selected size item
         private int GetButtonDimensions(string sizeName)
         {
             switch (sizeName)
             {
                 case "Small":
-                    return 100;
+                    return 150;
 
                 case "Medium":
-                    return 80;
+                    return 125;
 
                 case "Large":
-                    return 60;
+                    return 100;
 
                 default:
                     return 0;
             }
         }
 
-        // Function to get the number of pairs according to the selected size item
+        // Function to get the number of pairs as an integer number, according to the selected size item
         private int GetSelectedSizeInt(string sizeName)
         {
             switch (sizeName)
@@ -199,7 +198,7 @@ namespace ConcentrationCardGame
             }
         }
 
-        // Function to get the number of card copies according tot the selected rule item
+        // Function to get the number of card copies as an integer, according tot the selected rule item
         private int GetSelectedRuleInt(string ruleName)
         {
             switch (ruleName)
